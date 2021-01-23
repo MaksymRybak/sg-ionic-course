@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -8,12 +9,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class FilmDetailsPage implements OnInit {
 
-  filmId = null;
+  film: any;
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(private activatedRoute: ActivatedRoute, private http: HttpClient) { }
 
   ngOnInit() {
-    this.filmId = this.activatedRoute.snapshot.paramMap.get('id');
+    const filmId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.http.get(`https://swapi.dev/api/films/${filmId}`).subscribe(res => {
+      this.film = res;
+    });
   }
 
 }

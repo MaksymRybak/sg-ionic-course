@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-films',
@@ -9,16 +11,18 @@ import { NavController } from '@ionic/angular';
 })
 export class FilmsPage implements OnInit {
 
-  constructor(private navController: NavController, private router: Router) { }
+  films$: Observable<any>;
+
+  constructor(private navController: NavController, private router: Router, private http: HttpClient) { }
 
   ngOnInit() {
+    this.films$ = this.http.get('https://swapi.dev/api/films');
   }
 
-  openDetails() {
-    // Both of these would work!
-    // But the standard Router is recommended.
-    // this.navController.navigateForward(`/tabs/films/42`);
-    this.router.navigateByUrl(`/tabs/films/42`);
+  openDetails(film) {
+    let split = film.url.split('/');
+    let filmId = split[split.length - 2];
+    this.router.navigateByUrl(`/tabs/films/${filmId}`);
   }
 
   goToPlanets() {
