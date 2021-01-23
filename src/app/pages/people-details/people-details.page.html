@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/films"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ peopleDetails?.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card *ngIf="peopleDetails as pd">
+    <ion-card-content>
+      name: {{ pd.name }} <br />
+      height: {{ pd.height }} <br />
+      mass: {{ pd.mass }} <br />
+      hair_color: {{ pd.hair_color }} <br />
+      skin_color: {{ pd.skin_color }} <br />
+      eye_color: {{ pd.eye_color }} <br />
+      birth_year: {{ pd.birth_year }} <br />
+      gender: {{ pd.gender }} <br />
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -27,7 +27,11 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () => import('../people/people.module').then(m => m.PeoplePageModule)
-          }
+          },
+          {
+            path: ':id',
+            loadChildren: () => import('../people-details/people-details.module').then(m => m.PeopleDetailsPageModule)
+          },
         ]
       },
       {
